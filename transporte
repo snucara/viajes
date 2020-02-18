@@ -1,0 +1,72 @@
+import PASAJERO
+import RECORRIDO
+
+class Transporte:
+    def __init__(self,patente,capacidad,consumo,vel_max):
+        self.patente=patente
+        self.capacidad=capacidad
+        self.consumo=consumo
+        self.vel_max=vel_max
+        self.pasajeros=[]
+
+
+
+    def listar_pasajeros(self,reco):
+        c=0
+        print(self.patente)
+        for i in self.pasajeros:
+          print(self.pasajeros[c].get_dni(),self.pasajeros[c].get_nombre(),"(",self.pasajeros[c].get_origen(),"-",self.pasajeros[c].get_destino(),") $",self.pasajeros[c].dar_precio_pasaje(reco),)
+          c+=1
+
+        print("ocupados:",len(self.pasajeros))
+        print("libres:",self.capacidad - len(self.pasajeros))
+
+
+    def agregar_pasajero(self,pasajero):
+        if isinstance(pasajero,PASAJERO.Pasajero):
+            if len(self.pasajeros) < self.capacidad:
+                  self.pasajeros.append(pasajero)
+            else:
+                raise ValueError
+        else:
+            raise TypeError
+
+
+
+    def remover_pasajero(self,pasajero):
+        if isinstance(pasajero,Pasajero):
+            if pasajero in self.pasajeros:
+                    self.pasajeros.remove(pasajero)
+            else:
+                raise ValueError
+
+        else:
+            raise TypeError
+
+
+
+    def dar_ingreso_viaje(self,reco):
+        if isinstance(reco,RECORRIDO.Recorrido):
+             total=0
+             for i in self.pasajeros:
+                  total += i.dar_precio_pasaje(reco)
+
+             return total
+
+        else:
+            raise TypeError
+
+    def dar_consumo(self,reco):
+        if isinstance (reco,RECORRIDO.Recorrido):
+            total=0
+            for i in reco.re:
+                total=total+(self.consumo * i.longitud)
+
+            return total
+        else:
+            raise TypeError
+
+
+    def dar_porcentaje_ocupacion(self):
+        porcentaje=(len(self.pasajeros)/self.capacidad)*100
+        return porcentaje
