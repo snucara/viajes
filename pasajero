@@ -1,1 +1,36 @@
+class Pasajero:
+    def __init__(self,dni,nombre,origen,destino):
+        self.dni=dni
+        self.nombre=nombre
+        self.origen=origen
+        self.destino=destino
+
+    def get_dni(self):
+        return self.dni
+
+    def get_nombre(self):
+        return self.nombre
+
+    def get_origen(self):
+        return self.origen
+
+    def get_destino(self):
+        return self.destino
+
+
+    def dar_precio_pasaje(self,rec):
+        total=0
+        contador=0
+        for i in rec.re:
+            if self.origen == i.origen:
+                while True:
+                    total += rec.re[contador].precio
+                    if self.destino == rec.re[contador].destino:
+                        break
+                    contador += 1
+
+            contador +=1
+
+        return total
+
 
