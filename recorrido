@@ -1,0 +1,81 @@
+import TRANSPORTE
+
+class Recorrido:
+    def __init__(self,nombre):
+        self.nombre=nombre
+        self.re=[]
+
+
+    def dar_costo(self,transporte,precio_combustible):
+        if isinstance(transporte,TRANSPORTE.Transporte):
+            if len(self.re)!= 0:
+                total=0
+                for i in self.re:
+                       total=total + (((transporte.consumo * i.longitud)* precio_combustible)+ i.precio_peajes)
+
+
+                return total
+
+            else:
+                raise ValueError
+
+        else:
+            raise TypeError
+
+
+    def dar_longitud(self):
+        total=0
+        for i in self.re:
+            total= total + i.longitud
+
+        return total
+
+
+
+
+
+    def dar_tiempo_minimo(self,transporte):
+        if isinstance(transporte,TRANSPORTE.Transporte):
+            total_longitud=0
+            for i in self.re:
+                total_longitud += i.longitud
+
+            tiempo_minimo= total_longitud/ transporte.vel_max
+            return tiempo_minimo
+
+        else:
+            raise TypeError
+
+    def agregar_segmento(self,segmento):
+
+            self.re.append(segmento)
+
+
+
+
+    def eliminar_segmento(self,segmento):
+        if isinstance(segmento,Segmento):
+            if segmento in self.re:
+                self.re.remove(segmento)
+            else:
+                raise ValueError
+        else:
+            raise TypeError
+
+
+    def esta_completo(self):
+        contador=0
+        while contador<(len(self.re))-1:
+            if (self.re[contador].destino) != (self.re[contador+1].origen):
+                    return False
+            contador=contador+1
+
+        return True
+
+
+    def existe_lugar(self,lugar):
+        for i in self.re:
+            if (i.origen == lugar )or (i.destino == lugar):
+                return True
+
+        return False
