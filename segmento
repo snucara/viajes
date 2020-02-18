@@ -1,0 +1,15 @@
+class Segmento:
+    def __init__(self,origen,destino,precio,precio_peajes,longitud):
+       self.origen=origen
+       self.destino=destino
+       self.precio=precio
+       self.precio_peajes=precio_peajes
+       self.longitud=longitud
+
+    def dar_costo(self,transporte,precio_combustible):
+        if isinstance(transporte,Transporte):
+            total=(transporte.consumo * self.longitud)* precio_combustible
+            return total
+
+        else:
+            raise TypeError
