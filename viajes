@@ -1,0 +1,41 @@
+import PASAJERO
+import TRANSPORTE
+import SEGMENTO
+import RECORRIDO
+
+
+
+s1=SEGMENTO.Segmento("retiro","liniers",30,160,5)
+s2=SEGMENTO.Segmento("liniers","lujan",180,300,70)
+s3=SEGMENTO.Segmento("lujan","chacabuco",275,120,175)
+s4=SEGMENTO.Segmento("chacabuco","junin",175,0,60)
+
+
+r=RECORRIDO.Recorrido("ida retiro-junin")
+
+r.agregar_segmento(s1)
+r.agregar_segmento(s2)
+r.agregar_segmento(s3)
+r.agregar_segmento(s4)
+
+pax1=PASAJERO.Pasajero(23123123,"ana","liniers","chacabuco")
+pax2=PASAJERO.Pasajero(54321321,"pablo","retiro","junin")
+pax3=PASAJERO.Pasajero(43432433,"carla","retiro","chacabuco")
+
+
+t=TRANSPORTE.Transporte("OVD543",62,0.85,90)
+
+t.agregar_pasajero(pax1)
+t.agregar_pasajero(pax2)
+t.agregar_pasajero(pax3)
+
+print(r.dar_longitud())
+print(r.esta_completo())
+t.listar_pasajeros(r)
+print(r.dar_tiempo_minimo(t))
+print(t.dar_consumo(r))
+print(r.dar_costo(t,54))
+print(t.dar_ingreso_viaje(r))
+print(r.existe_lugar("chacabuco"))
+print(r.existe_lugar("caba"))
+print(t.dar_porcentaje_ocupacion())
